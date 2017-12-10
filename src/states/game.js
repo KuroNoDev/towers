@@ -16,10 +16,17 @@ class Game {
 
   generateMobs() {
     this.mobs = [];
-    let number = 10;
-    for (let index = 0; index < number; index++) {
-      this.mobs.push(new Angery(this.game))
-    }
+    let mobs = [
+      [{x: 0, y: 0, executed: true}, {x: 500, y: 0}, {x: 500, y: 500}],
+      [{x: -50, y: 0, executed: true}, {x: 500, y: 0}, {x: 500, y: 500}],
+      [{x: -100, y: 0, executed: true}, {x: 500, y: 0}, {x: 500, y: 500}],
+      [{x: -150, y: 0, executed: true}, {x: 500, y: 0}, {x: 500, y: 500}],
+      [{x: -200, y: 0, executed: true}, {x: 500, y: 0}, {x: 500, y: 500}],
+    ];
+
+    mobs.forEach((mob) => {
+      this.mobs.push(new Angery(this.game, mob))
+    });
   }
 
   update() {
