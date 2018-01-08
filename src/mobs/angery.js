@@ -1,6 +1,5 @@
 class Angery {
   constructor(game, data) {
-    // console.log(this, data)
     this.game = game;
     this.data = data;
     this.create();
@@ -12,11 +11,13 @@ class Angery {
     if (firstMove.hasOwnProperty('delay')) firstMove.time = firstMove.time || 0;
     else {
       this.sprite = this.game.add.sprite(firstMove.x, firstMove.y, 'angery');
+      this.sprite.anchor = {x: 0.5, y: 0.5}
       firstMove.executed = true;
     }
   }
 
   update() {
+    if (this.sprite && this.sprite.destroyed) return;
     let speed = 3;
   
     if (!this.sprite) {
@@ -26,6 +27,7 @@ class Angery {
         firstMove.time += speed;
       } else {
         this.sprite = this.game.add.sprite(firstMove.x, firstMove.y, 'angery');
+        this.sprite.anchor = {x: 0.5, y: 0.5}
         firstMove.executed = true;
       }
 
@@ -65,9 +67,11 @@ class Angery {
         
         if (xDirection === 'right' && this.sprite.x < nextMove.x) {
           this.sprite.x += xSpeed;
+          this.sprite.rotation += xSpeed / 50;
           executed = false;
         } else if (xDirection === 'left' && this.sprite.x > nextMove.x) {
           this.sprite.x -= xSpeed;
+          this.sprite.rotation -= xSpeed / 50;
           executed = false;
         }
         
@@ -83,6 +87,9 @@ class Angery {
       if (executed) {
         nextMove.executed = true;
       }
+    } else {
+      this.sprite.destroyed = true;
+      this.sprite.destroy();
     }
   }
 }
