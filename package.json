@@ -4,14 +4,13 @@
   "description": "",
   "scripts": {
     "start": "budo src/main.js:bundle.js --live -- -d -e src/main.js -t [babelify --comments false --presets env]",
-    "prebuild": "mkdirp build",
     "build": "npm run build:js && npm run build:css && npm run build:html && npm run copy:all",
-    "build:js": "browserify -d -e src/main.js -t [babelify --comments false --presets env] | uglifyjs -cm > build/bundle.min.js",
-    "build:css": "cleancss css/main.css -o build/main.min.css",
-    "build:html": "htmlprocessor index.html -o build/index.html",
+    "build:js": "browserify -d -e src/main.js -t [babelify --comments false --presets env] | uglifyjs -cm > server/client/bundle.min.js",
+    "build:css": "cleancss css/main.css -o server/client/main.min.css",
+    "build:html": "htmlprocessor index.html -o server/client/index.html",
     "copy:all": "npm run copy:assets && npm run copy:phaser",
-    "copy:assets": "ncp assets build/assets/",
-    "copy:phaser": "ncp node_modules/phaser/build/phaser.min.js build/phaser.min.js"
+    "copy:assets": "ncp assets server/client/assets/",
+    "copy:phaser": "ncp node_modules/phaser/build/phaser.min.js server/client/phaser.min.js"
   },
   "keywords": [],
   "author": "",
