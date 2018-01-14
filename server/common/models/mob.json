@@ -1,0 +1,32 @@
+{
+  "name": "mob",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "time": {
+      "type": "number"
+    },
+    "pattern": {
+      "type": "array"
+    },
+    "mobType": {
+      "type": "string"
+    },
+    "count": {
+      "type": "number"
+    },
+    "speed": {
+      "type": "number"
+    },
+    "mobs": {
+      "type": "array"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

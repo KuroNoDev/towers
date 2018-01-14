@@ -14,7 +14,8 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "db",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
@@ -35,7 +36,20 @@
     "dataSource": "db",
     "public": false
   },
-  "Message": {
-    "dataSource": null
+  "player": {
+    "dataSource": "db",
+    "public": true
+  },
+  "mob": {
+    "dataSource": "db",
+    "public": true
+  },
+  "game": {
+    "dataSource": "db",
+    "public": true
+  },
+  "score": {
+    "dataSource": "db",
+    "public": true
   }
 }

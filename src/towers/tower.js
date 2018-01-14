@@ -10,30 +10,31 @@ class Rock {
 
   create () {
     let style = {
-      font: '12px Arial',
+      font: '14px Arial',
       fill: '#000',
-      backgroundColor: 'rgba(255,255,255,0.6)',
+      stroke: '#fff',
+      strokeThickness: 3,
       align: 'center',
       boundsAlignH: 'center',
       boundsAlignV: 'middle'
     }
 
-    this.sprite = this.game.add.sprite(this.data.x, this.data.y, 'rock');
+    this.sprite = this.game.add.sprite(this.data.x, this.data.y, this.data.towerType);
     this.text = this.game.add.text(this.data.x, this.data.y, `${this.data.player}\n${this.data.score}`, style);
     this.text.lineSpacing = -10;
     this.sprite.anchor = {x: 0.5, y: 0.5};
-    this.text.anchor = {x: 0.5, y: 0.5};
+    this.text.anchor = {x: 0.5, y: -0.8};
   }
 
   updateScore () {
-    let towers = this.towers.filter(x => x.data.player === this.data.player);
-    let score = 0
+    // let towers = this.towers.filter(x => x.data.player === this.data.player);
+    // let score = 0
 
-    towers.forEach((tower) => {
-      score += tower.data.score;
-    });
+    // towers.forEach((tower) => {
+    //   score += tower.data.score;
+    // });
 
-    this.text.setText(`${this.data.player}\n${score / 100}`);
+    this.text.setText(`${this.data.player}\n${this.data.score / 100}`);
   }
 
   update () {

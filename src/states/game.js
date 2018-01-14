@@ -1,75 +1,149 @@
 import Angery from '../mobs/angery';
-import Rock from '../towers/rock';
+import Ninja from '../mobs/ninja';
+import Tower from '../towers/tower';
+
+const baseUrl = 'http://localhost:3000/api/'
 
 class Game {
 
   constructor () {
     this.towers = [];
     this.mobs = [];
-  }
-
-  preload () {
-    this.game.load.image('angery', 'assets/angery.png');
+    this.preview = true;
+    this.running = false;
   }
 
   create () {
-    this.generateTowers();
-    this.generateMobs();
+    this.getCurrentMob()
+    this.timer = this.game.add.text(1280, 0, '', {
+      font: '20px Arial',
+      fill: '#000',
+      stroke: '#fff',
+      strokeThickness: 5
+    });
+    this.timer.anchor = {x: 1, y: 0};
+  }
+
+  getCurrentMob () {
+    $.get(`${baseUrl}mobs/current`, (response) => {
+      this.mob = response;
+      this.currentDate = Date.now();
+      if (this.preview) this.generateMobs();
+    }).fail((error) => {
+      console.error(error.responseJSON.error.message)
+    });
   }
 
   generateTowers () {
-    let towers = [
-      {x: Math.random() * 1270, y: Math.random() * 720, player: 'AUF-001', score: 0},
-      {x: Math.random() * 1270, y: Math.random() * 720, player: 'AUF-001', score: 0},
-      {x: Math.random() * 1270, y: Math.random() * 720, player: 'AUF-001', score: 0},
-      {x: Math.random() * 1270, y: Math.random() * 720, player: 'HAU-001', score: 0},
-      {x: Math.random() * 1270, y: Math.random() * 720, player: 'HAU-001', score: 0},
-      {x: Math.random() * 1270, y: Math.random() * 720, player: 'HAU-001', score: 0},
-      {x: Math.random() * 1270, y: Math.random() * 720, player: 'TORO-001', score: 0},
-      {x: Math.random() * 1270, y: Math.random() * 720, player: 'TORO-001', score: 0},
-      {x: Math.random() * 1270, y: Math.random() * 720, player: 'TORO-001', score: 0}
-    ];
-
-    towers.forEach((tower) => {
-      this.towers.push(new Rock(this.game, tower, this.mobs, this.towers))
+    $.get(`${baseUrl}players`, (response) => {
+      this.generateMobs();
+      this.players = response;
+      response.forEach((player) => {
+        player.towers.forEach((tower, index) => {
+          if (index >= 3) return;
+          tower.player = player.name;
+          tower.towerType = player.towerType;
+          tower.score = 0;
+          this.towers.push(new Tower(this.game, tower, this.mobs, this.towers));
+        })
+      });
     });
   }
 
   generateMobs () {
-    let x = (Math.random() * 1270);
+    this.mobs = [];
+    this.mob.mobs.forEach((mob) => {
+      mob.speed = mob.speed || this.mob.speed;
 
-    let mobs = [
-      [{x: x + 0, y: 0}, {x: x + 250, y: 250}, {x: x + 0, y: 250}, {x: x + 250, y: 500}],
-      [{x: x + 500, y: 0}, {x: x + 250, y: 250}, {x: x + 500, y: 250}, {x: x + 250, y: 500}],
-      [{x: x + 250, y: 0}, {x: x + 250, y: 250}, {x: x + 250, y: 500}],
-      [{x: x + 0, y: 0, delay: 45}, {x: x + 250, y: 250}, {x: x + 500, y: 500}, {x: x + 250, y: 500}],
-      [{x: x + 500, y: 0, delay: 45}, {x: x + 250, y: 250}, {x: x + 0, y: 500}, {x: x + 250, y: 500}],
-      [{x: x + 250, y: 0, delay: 45}, {x: x + 250, y: 250}, {x: x + 250, y: 500}],
-      [{x: 0, y: 25, executed: true}, {x: 640, y: 25}, {x: 640, y: 720}],
-      [{x: -50, y: 25, executed: true}, {x: 640, y: 25}, {x: 640, y: 720}],
-      [{x: -100, y: 25, executed: true}, {x: 640, y: 25}, {x: 640, y: 720}],
-      [{x: -150, y: 25, executed: true}, {x: 640, y: 25}, {x: 640, y: 720}],
-      [{x: -200, y: 25, executed: true}, {x: 640, y: 25}, {x: 640, y: 720}]
-    ];
-
-    for (let index = 0; index < 100; index++) {
-      mobs.push([{x: Math.random() * 1270, y: Math.random() * 720, delay: Math.random() * 1000 + 1500}, {x: Math.random() * 1270, y: Math.random() * 720}])
-    }
-
-    mobs.forEach((mob) => {
-      this.mobs.push(new Angery(this.game, mob))
+      if (this.mob.mobType === 'Angery') {
+        this.mobs.push(new Angery(this.game, mob))
+      } else if (this.mob.mobType === 'Ninja') {
+        this.mobs.push(new Ninja(this.game, mob))
+      }
     });
   }
 
   update () {
+    if (!this.mob) return;
+
+    let elapsedTime = (Date.now() - this.currentDate);
+    let totalSeconds = (this.mob.timeRemaining - elapsedTime) / 1000;
+    let hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
+
+    if (hours <= 0 && minutes <= 0 && seconds <= 60) {
+      this.preview = false;
+      this.timer.addColor('#f00', 0);
+    }
+
+    if (hours <= 0 && minutes <= 0 && seconds <= 45) {
+      if (!this.getFinalMob) {
+        this.getFinalMob = true;
+        this.getCurrentMob();
+      }
+    }
+
+    if (hours > 0 || minutes > 0 || seconds > 0) {
+      this.timer.setText(`mm:${Math.ceil(minutes)} ss:${Math.ceil(seconds)}`);
+    } else {
+      if (!this.running) {
+        this.running = true;
+        this.timer.setText(`Wave ${this.mob.id}`);
+        this.generateTowers();
+      }
+    }
+
     this.mobs.forEach((mob, index) => { 
       mob.update();
       if (mob.sprite && mob.sprite.destroyed) {
-        this.mobs.splice(index, 1)
+        this.mobs.splice(index, 1);
+      }
+
+      if (this.mobs.length === 0 && this.preview) {
+        this.getCurrentMob();
+      } else if (this.mobs.length === 0 && this.running) {
+        this.postScores();
       }
     })
 
-    this.towers.forEach((tower) => { tower.update(); })
+    if (this.running) {
+      this.towers.forEach((tower) => { tower.update(); })
+    }
+  }
+
+  postScores () {
+    let playerCount = this.players.length;
+    let successPostCount = 0;
+
+    this.players.forEach((player) => {
+      let filter = encodeURIComponent(`{"where": {"playerId":${player.id}}}`);
+      $.get(`${baseUrl}scores/findOne?filter=${filter}`, (response) => {
+        let id = response.id;
+        response.towers[`"${this.mob.id}"`] = player.towers;
+        delete response.id;
+        $.post(`${baseUrl}scores/${id}/replace`, response, (response) => {
+          successPostCount += 1;
+
+          if (successPostCount >= playerCount) {
+            setTimeout(() => {
+              location.reload();
+            }, 5000);
+          }
+        })
+      }).fail((error) => {
+        let score = {
+          name: player.name,
+          playerId: player.id,
+          towers: {},
+          total: 0
+        }
+
+        score.towers[`"${this.mob.id}"`] = player.towers;
+        $.post(`${baseUrl}scores`, score)
+      });
+    })
   }
 
 }

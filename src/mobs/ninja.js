@@ -1,4 +1,4 @@
-class Angery {
+class Ninja {
   constructor(game, data) {
     this.game = game;
     this.data = data;
@@ -10,8 +10,8 @@ class Angery {
 
     if (firstMove.hasOwnProperty('delay')) firstMove.time = firstMove.time || 0;
     else {
-      this.sprite = this.game.add.sprite(firstMove.x, firstMove.y, 'angery');
-      this.sprite.anchor = {x: 0.5, y: 0.5}
+      this.sprite = this.game.add.sprite(firstMove.x, firstMove.y, 'ninja');
+      this.sprite.anchor = {x: 0.6, y: 0.6}
       firstMove.executed = true;
     }
   }
@@ -22,13 +22,12 @@ class Angery {
   
     if (!this.sprite) {
       let firstMove = this.data[0]
-      speed = firstMove.speed || speed;
 
       if (firstMove.time < firstMove.delay) {
         firstMove.time += speed;
       } else {
-        this.sprite = this.game.add.sprite(firstMove.x, firstMove.y, 'angery');
-        this.sprite.anchor = {x: 0.5, y: 0.5}
+        this.sprite = this.game.add.sprite(firstMove.x, firstMove.y, 'ninja');
+        this.sprite.anchor = {x: 0.6, y: 0.6}
         firstMove.executed = true;
       }
 
@@ -41,8 +40,6 @@ class Angery {
       let previousMove = this.data[this.data.indexOf(nextMove) - 1]
       let executed = true;
 
-      speed = nextMove.speed || speed;
-
       if (nextMove.hasOwnProperty('delay')) nextMove.time = nextMove.time || 0;
       if (nextMove.hasOwnProperty('delay') && nextMove.time < nextMove.delay) {
         nextMove.time += speed;
@@ -51,6 +48,7 @@ class Angery {
         let xDirection = nextMove.x - previousMove.x >= 0 ? 'right' : 'left';
         let yDirection = nextMove.y - previousMove.y >= 0 ? 'down' : 'up';
         let xDistance, yDistance, xSpeed, ySpeed;
+        let randScale = this.game.rnd.realInRange(0.9, 1.1);
 
         xDistance = xDirection === 'right'
           ? Math.abs(nextMove.x - this.sprite.x)
@@ -70,11 +68,11 @@ class Angery {
         
         if (xDirection === 'right' && this.sprite.x < nextMove.x) {
           this.sprite.x += xSpeed;
-          this.sprite.rotation += xSpeed / 50;
+          this.sprite.scale.setTo(-1, randScale);
           executed = false;
         } else if (xDirection === 'left' && this.sprite.x > nextMove.x) {
           this.sprite.x -= xSpeed;
-          this.sprite.rotation -= xSpeed / 50;
+          this.sprite.scale.setTo(1, randScale);
           executed = false;
         }
         
@@ -97,4 +95,4 @@ class Angery {
   }
 }
 
-export default Angery;
+export default Ninja;

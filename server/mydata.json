@@ -1,0 +1,43 @@
+{
+  "ids": {
+    "User": 1,
+    "AccessToken": 1,
+    "ACL": 1,
+    "RoleMapping": 1,
+    "Role": 1,
+    "mob": 3,
+    "player": 8,
+    "game": 2,
+    "score": 7
+  },
+  "models": {
+    "User": {},
+    "AccessToken": {},
+    "ACL": {},
+    "RoleMapping": {},
+    "Role": {},
+    "mob": {
+      "1": "{\"id\":1,\"time\":80000,\"pattern\":[{\"x\":\"0\",\"y\":\"fixedRandom * 500 + 25\",\"delay\":\"index * 50\"},{\"x\":\"640\",\"y\":\"25\"},{\"x\":\"640\",\"y\":\"720\"}],\"mobType\":\"Angery\",\"count\":5,\"speed\":3,\"mobs\":[]}",
+      "2": "{\"time\":200000,\"pattern\":[{\"x\":\"Math.random() * 1270\",\"y\":\"Math.random() * 720\",\"delay\":\"Math.random() * 1000\"},{\"x\":640,\"y\":360}],\"mobType\":\"Ninja\",\"count\":100,\"speed\":5,\"mobs\":[],\"id\":2}"
+    },
+    "player": {
+      "1": "{\"id\":1,\"name\":\"AUF-001\",\"password\":\"$2a$10$t3UMMZ4mEaxumr9kaYMb7.5myO8p4MmseKfaRgW1jWftYtClP02v6\",\"towerType\":\"tower-1\",\"towers\":[{\"x\":100,\"y\":100},{\"x\":300,\"y\":300},{\"x\":600,\"y\":600}]}",
+      "2": "{\"name\":\"HAU-001\",\"password\":\"$2a$10$t3UMMZ4mEaxumr9kaYMb7.5myO8p4MmseKfaRgW1jWftYtClP02v6\",\"towerType\":\"tower-2\",\"towers\":[{\"x\":1000,\"y\":700},{\"x\":800,\"y\":600},{\"x\":550,\"y\":500}],\"id\":2}",
+      "3": "{\"name\":\"TORO-001\",\"password\":\"$2a$10$t3UMMZ4mEaxumr9kaYMb7.5myO8p4MmseKfaRgW1jWftYtClP02v6\",\"towerType\":\"tower-3\",\"towers\":[{\"x\":570,\"y\":80},{\"x\":570,\"y\":170},{\"x\":570,\"y\":260}],\"id\":3}",
+      "4": "{\"name\":\"KURO-001\",\"password\":\"$2a$10$t3UMMZ4mEaxumr9kaYMb7.5myO8p4MmseKfaRgW1jWftYtClP02v6\",\"towerType\":\"tower-4\",\"towers\":[{\"x\":640,\"y\":360},{\"x\":730,\"y\":360},{\"x\":550,\"y\":360}],\"id\":4}",
+      "5": "{\"name\":\"ANGERY-001\",\"password\":\"$2a$10$t3UMMZ4mEaxumr9kaYMb7.5myO8p4MmseKfaRgW1jWftYtClP02v6\",\"towerType\":\"tower-5\",\"towers\":[{\"x\":1200,\"y\":700},{\"x\":100,\"y\":700},{\"x\":640,\"y\":700}],\"id\":5}",
+      "7": "{\"id\":7,\"name\":\"string\",\"password\":\"$2a$10$8PGlDHXrvcvH9kfrARC8zOzvQRUBQPeRPf0LYiKoc2oyVsgu4Goa2\",\"towerType\":\"tower-10\",\"towers\":[{\"x\":200,\"y\":200}]}"
+    },
+    "game": {
+      "1": "{\"id\":1,\"startTime\":1515945632020,\"status\":\"running\"}"
+    },
+    "score": {
+      "1": "{\"id\":1,\"name\":\"AUF-001\",\"playerId\":1,\"towers\":{\"\\\"2\\\"\":[{\"x\":\"100\",\"y\":\"100\",\"player\":\"AUF-001\",\"towerType\":\"tower-1\",\"score\":\"117\"},{\"x\":\"300\",\"y\":\"300\",\"player\":\"AUF-001\",\"towerType\":\"tower-1\",\"score\":\"472\"},{\"x\":\"600\",\"y\":\"600\",\"player\":\"AUF-001\",\"towerType\":\"tower-1\",\"score\":\"110\"}],\"\\\"1\\\"\":[{\"x\":\"100\",\"y\":\"100\",\"player\":\"AUF-001\",\"towerType\":\"tower-1\",\"score\":\"230\"},{\"x\":\"300\",\"y\":\"300\",\"player\":\"AUF-001\",\"towerType\":\"tower-1\",\"score\":\"0\"},{\"x\":\"600\",\"y\":\"600\",\"player\":\"AUF-001\",\"towerType\":\"tower-1\",\"score\":\"309\"}]},\"total\":0}",
+      "2": "{\"id\":2,\"name\":\"HAU-001\",\"playerId\":2,\"towers\":{\"\\\"2\\\"\":[{\"x\":\"1000\",\"y\":\"700\",\"player\":\"HAU-001\",\"towerType\":\"tower-2\",\"score\":\"59\"},{\"x\":\"800\",\"y\":\"600\",\"player\":\"HAU-001\",\"towerType\":\"tower-2\",\"score\":\"100\"},{\"x\":\"550\",\"y\":\"500\",\"player\":\"HAU-001\",\"towerType\":\"tower-2\",\"score\":\"286\"}],\"\\\"1\\\"\":[{\"x\":\"1000\",\"y\":\"700\",\"player\":\"HAU-001\",\"towerType\":\"tower-2\",\"score\":\"0\"},{\"x\":\"800\",\"y\":\"600\",\"player\":\"HAU-001\",\"towerType\":\"tower-2\",\"score\":\"0\"},{\"x\":\"550\",\"y\":\"500\",\"player\":\"HAU-001\",\"towerType\":\"tower-2\",\"score\":\"130\"}]},\"total\":0}",
+      "3": "{\"id\":3,\"name\":\"TORO-001\",\"playerId\":3,\"towers\":{\"\\\"2\\\"\":[{\"x\":\"570\",\"y\":\"80\",\"player\":\"TORO-001\",\"towerType\":\"tower-3\",\"score\":\"68\"},{\"x\":\"570\",\"y\":\"170\",\"player\":\"TORO-001\",\"towerType\":\"tower-3\",\"score\":\"209\"},{\"x\":\"570\",\"y\":\"260\",\"player\":\"TORO-001\",\"towerType\":\"tower-3\",\"score\":\"777\"}],\"\\\"1\\\"\":[{\"x\":\"570\",\"y\":\"80\",\"player\":\"TORO-001\",\"towerType\":\"tower-3\",\"score\":\"500\"},{\"x\":\"570\",\"y\":\"170\",\"player\":\"TORO-001\",\"towerType\":\"tower-3\",\"score\":\"230\"},{\"x\":\"570\",\"y\":\"260\",\"player\":\"TORO-001\",\"towerType\":\"tower-3\",\"score\":\"230\"}]},\"total\":0}",
+      "4": "{\"id\":4,\"name\":\"KURO-001\",\"playerId\":4,\"towers\":{\"\\\"2\\\"\":[{\"x\":\"640\",\"y\":\"360\",\"player\":\"KURO-001\",\"towerType\":\"tower-4\",\"score\":\"2021\"},{\"x\":\"730\",\"y\":\"360\",\"player\":\"KURO-001\",\"towerType\":\"tower-4\",\"score\":\"1717\"},{\"x\":\"550\",\"y\":\"360\",\"player\":\"KURO-001\",\"towerType\":\"tower-4\",\"score\":\"1715\"}],\"\\\"1\\\"\":[{\"x\":\"640\",\"y\":\"360\",\"player\":\"KURO-001\",\"towerType\":\"tower-4\",\"score\":\"335\"},{\"x\":\"730\",\"y\":\"360\",\"player\":\"KURO-001\",\"towerType\":\"tower-4\",\"score\":\"155\"},{\"x\":\"550\",\"y\":\"360\",\"player\":\"KURO-001\",\"towerType\":\"tower-4\",\"score\":\"130\"}]},\"total\":0}",
+      "5": "{\"id\":5,\"name\":\"ANGERY-001\",\"playerId\":5,\"towers\":{\"\\\"2\\\"\":[{\"x\":\"1200\",\"y\":\"700\",\"player\":\"ANGERY-001\",\"towerType\":\"tower-5\",\"score\":\"62\"},{\"x\":\"100\",\"y\":\"700\",\"player\":\"ANGERY-001\",\"towerType\":\"tower-5\",\"score\":\"60\"},{\"x\":\"640\",\"y\":\"700\",\"player\":\"ANGERY-001\",\"towerType\":\"tower-5\",\"score\":\"20\"}],\"\\\"1\\\"\":[{\"x\":\"1200\",\"y\":\"700\",\"player\":\"ANGERY-001\",\"towerType\":\"tower-5\",\"score\":\"0\"},{\"x\":\"100\",\"y\":\"700\",\"player\":\"ANGERY-001\",\"towerType\":\"tower-5\",\"score\":\"0\"},{\"x\":\"640\",\"y\":\"700\",\"player\":\"ANGERY-001\",\"towerType\":\"tower-5\",\"score\":\"214\"}]},\"total\":0}",
+      "6": "{\"id\":6,\"name\":\"string\",\"playerId\":7,\"towers\":{\"\\\"2\\\"\":[{\"x\":\"200\",\"y\":\"200\",\"player\":\"string\",\"towerType\":\"tower-10\",\"score\":\"278\"}],\"\\\"1\\\"\":[{\"x\":\"200\",\"y\":\"200\",\"player\":\"string\",\"towerType\":\"tower-10\",\"score\":\"275\"}]},\"total\":0}"
+    }
+  }
+}

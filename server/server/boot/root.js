@@ -9,5 +9,9 @@ module.exports = function(server) {
     res.sendFile(path.join(__dirname + '/../../client/index.html'));
   });
 
+  router.get('/player', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../../client/player/index.html'));
+  });
+
   server.use(router);
 };
